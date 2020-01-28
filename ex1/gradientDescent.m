@@ -18,9 +18,12 @@ for iter = 1:num_iters
     %
 
 
-
-
-
+    h = (theta' * X')';
+    n = length(theta);
+    d = zeros(n, 1);
+    for j = 1:n
+        d(j, 1) = sum((h - y) .* X(:, j)) / m;
+    theta = theta - (alpha * d);
 
 
     % ============================================================
