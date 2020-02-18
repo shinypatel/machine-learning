@@ -83,6 +83,8 @@ fprintf('Running gradient descent ...\n');
 
 % Choose some alpha value
 alpha = [1, 0.3, 0.1, 0.03, 0.01, 0.003, 0.001]
+n = 3;
+thetas = zeros(n, length(alpha));
 num_iters = 400;
 
 % Plot the convergence graph
@@ -93,6 +95,7 @@ cc=hsv(12);
 for i = 1:length(alpha)
 	theta = zeros(3, 1);
 	[theta, J_history] = gradientDescentMulti(X, y, theta, alpha(i), num_iters);
+	thetas(:, i) = theta;
 	
 	% Display gradient descent's result
 	fprintf('Theta computed from gradient descent for alpha = %.3f: \n', alpha(i));
@@ -114,8 +117,9 @@ set(lgnd, 'fontsize', 28);
 % ====================== YOUR CODE HERE ======================
 % Recall that the first column of X is all-ones. Thus, it does
 % not need to be normalized.
-price = 0; % You should change this
-
+x = [1650, 3];
+x_norm = [1, (x - mu)./sigma];
+price = thetas(:, 3)' * x_norm'; % theta computed for alpha = 0.1
 
 % ============================================================
 
